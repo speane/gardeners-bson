@@ -1,5 +1,8 @@
 package entities;
 
+import entities.containers.Garden;
+import entities.containers.Stock;
+
 /**
  * Created by Evgeny Shilov on 01.04.2016.
  */
