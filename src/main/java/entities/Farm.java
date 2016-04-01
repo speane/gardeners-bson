@@ -14,9 +14,4 @@ public class Farm {
         this.stock = new Stock();
         this.garden = new Garden();
     }
-
-    public Farm(Stock stock, Garden garden) {
-        this.stock = stock;
-        this.garden = garden;
-    }
 }

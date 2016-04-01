@@ -8,25 +8,33 @@ import java.util.ArrayList;
  * Created by Evgeny Shilov on 01.04.2016.
  */
 public class Garden {
-    private ArrayList<Plant> plants;
+    private  ArrayList<Plant> plants;
 
     public Garden() {
         plants = new ArrayList<Plant>();
     }
 
-    public void delete(int index) {
+    public void deletePlant(int index) {
         if (isInRange(index)) {
-            plants.remove(index);
+            plants.remove(index - 1);
         }
     }
 
     public void setPlantSizeAtIndex(int index, int size) {
         if (isInRange(index)) {
-            plants.get(index).setSize(size);
+            plants.get(index - 1).setSize(size);
         }
+    }
+
+    public void addPlant(Plant plant) {
+        plants.add(plant);
     }
 
     private boolean isInRange(int index) {
         return (index >= 0) && (index < plants.size());
+    }
+
+    public ArrayList<Plant> getPlants() {
+        return plants;
     }
 }
