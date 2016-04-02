@@ -31,7 +31,7 @@ public class Garden {
     }
 
     private boolean isInRange(int index) {
-        return (index >= 0) && (index < plants.size());
+        return (index > 0) && (index <= plants.size());
     }
 
     public ArrayList<Plant> getPlants() {

@@ -8,4 +8,8 @@ public class Tree extends Plant {
         super(size);
         name = "Tree";
     }
+
+    public Tree() {
+
+    }
 }

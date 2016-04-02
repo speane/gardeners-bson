@@ -1,9 +1,11 @@
 package entities.plants;
 
+import serialization.Serializable;
+
 /**
  * Created by Evgeny Shilov on 02.04.2016.
  */
-public abstract class Plant {
+public abstract class Plant implements Serializable {
     private final int INITTIAL_SIZE = 1;
     protected int size;
     protected String name;

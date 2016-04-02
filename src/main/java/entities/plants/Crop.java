@@ -8,4 +8,5 @@ public class Crop extends Plant {
         super(size);
         name = "Crop";
     }
+    public Crop() {}
 }
