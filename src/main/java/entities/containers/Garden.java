@@ -1,40 +1,35 @@
 package entities.containers;
 
-import entities.plants.Plant;
+import entities.plants.Tree;
+import serialization.Serializable;
 
 import java.util.ArrayList;
 
 /**
  * Created by Evgeny Shilov on 01.04.2016.
  */
-public class Garden {
-    private  ArrayList<Plant> plants;
+public class Garden implements Serializable {
+    private ArrayList<Tree> trees;
 
     public Garden() {
-        plants = new ArrayList<Plant>();
+        trees = new ArrayList<Tree>();
     }
 
     public void deletePlant(int index) {
         if (isInRange(index)) {
-            plants.remove(index - 1);
+            trees.remove(index - 1);
         }
     }
 
-    public void setPlantSizeAtIndex(int index, int size) {
-        if (isInRange(index)) {
-            plants.get(index - 1).setSize(size);
-        }
-    }
-
-    public void addPlant(Plant plant) {
-        plants.add(plant);
+    public void addTree(Tree tree) {
+        trees.add(tree);
     }
 
     private boolean isInRange(int index) {
-        return (index > 0) && (index <= plants.size());
+        return (index > 0) && (index <= trees.size());
     }
 
-    public ArrayList<Plant> getPlants() {
-        return plants;
+    public ArrayList<Tree> getTrees() {
+        return trees;
     }
 }

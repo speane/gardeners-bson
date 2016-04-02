@@ -8,13 +8,11 @@ import java.io.*;
  * Created by Evgeny Shilov on 02.04.2016.
  */
 public class TreeSerializer implements BSONSerializer<Tree> {
-    public void saveToFile(File file, Tree object) throws IOException {
-        DataOutputStream dos = new DataOutputStream(new FileOutputStream(file));
+    public void saveToFile(DataOutputStream dos, Tree object) throws IOException {
         mapper.writeValue(dos, object);
     }
 
-    public Tree loadFromFile(File file) throws IOException {
-        DataInputStream dis = new DataInputStream(new FileInputStream(file));
+    public Tree loadFromFile(DataInputStream dis) throws IOException {
         return mapper.readValue(dis, Tree.class);
     }
 }
