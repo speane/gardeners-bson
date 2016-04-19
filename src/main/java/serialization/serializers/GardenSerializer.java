@@ -8,11 +8,11 @@ import java.io.*;
  * Created by Evgeny Shilov on 02.04.2016.
  */
 public class GardenSerializer implements BSONSerializer<Garden>{
-    public void saveToFile(DataOutputStream dos, Garden object) throws IOException {
-        mapper.writeValue(dos, object);
+    public void writeToStream(DataOutputStream stream, Garden object) throws IOException {
+        mapper.writeValue(stream, object);
     }
 
-    public Garden loadFromFile(DataInputStream dis) throws IOException {
-        return mapper.readValue(dis, Garden.class);
+    public Garden readFromStream(DataInputStream stream) throws IOException {
+        return mapper.readValue(stream, Garden.class);
     }
 }

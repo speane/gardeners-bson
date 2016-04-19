@@ -1,7 +1,7 @@
 package serialization.serializers;
 
 import entities.containers.Garden;
-import entities.containers.Kailyard;
+import entities.containers.KaleYard;
 import entities.equipment.Tractor;
 import entities.equipment.WaterMachine;
 import entities.plants.Tree;
@@ -17,7 +17,7 @@ public class SerializerFactory {
     private static Map<Class, BSONSerializer> serializerMap = new HashMap<Class, BSONSerializer>();
     static {
         serializerMap.put(Tree.class, new TreeSerializer());
-        serializerMap.put(Kailyard.class, new KailyardSerializer());
+        serializerMap.put(KaleYard.class, new KailyardSerializer());
         serializerMap.put(Garden.class, new GardenSerializer());
         serializerMap.put(Tractor.class, new TractorSerializer());
         serializerMap.put(WaterMachine.class, new WaterMachineSerializer());

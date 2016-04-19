@@ -8,10 +8,10 @@ import java.util.ArrayList;
 /**
  * Created by Evgeny Shilov on 02.04.2016.
  */
-public class Kailyard implements Serializable {
+public class KaleYard implements Serializable {
     private ArrayList<Vegetable> vegetables;
 
-    public Kailyard() {
+    public KaleYard() {
         vegetables = new ArrayList<Vegetable>();
     }
 

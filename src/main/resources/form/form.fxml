@@ -25,7 +25,7 @@
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <TitledPane animated="false" layoutX="638.0" layoutY="52.0" prefHeight="220.0" prefWidth="202.0" text="Убрать">
+                  <TitledPane animated="false" layoutX="638.0" layoutY="52.0" prefHeight="220.0" prefWidth="215.0" text="Убрать">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="200.0">
                            <children>
@@ -37,7 +37,7 @@
                         </AnchorPane>
                      </content>
                   </TitledPane>
-                  <TitledPane animated="false" layoutX="864.0" layoutY="52.0" prefHeight="319.0" prefWidth="305.0" text="Изменить дерево">
+                  <TitledPane animated="false" layoutX="902.0" layoutY="52.0" prefHeight="319.0" prefWidth="305.0" text="Изменить дерево">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="200.0">
                            <children>

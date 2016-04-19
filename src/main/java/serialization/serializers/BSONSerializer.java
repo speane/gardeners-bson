@@ -13,6 +13,6 @@ import java.io.IOException;
 public interface BSONSerializer<T extends serialization.Serializable> {
     ObjectMapper mapper = new ObjectMapper(new BsonFactory());
 
-    void saveToFile(DataOutputStream dos, T object) throws IOException;
-    T loadFromFile(DataInputStream dis) throws IOException;
+    void writeToStream(DataOutputStream stream, T object) throws IOException;
+    T readFromStream(DataInputStream stream) throws IOException;
 }
