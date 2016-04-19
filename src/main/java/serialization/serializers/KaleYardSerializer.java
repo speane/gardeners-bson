@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by Evgeny Shilov on 02.04.2016.
  */
-public class KailyardSerializer implements BSONSerializer<KaleYard> {
+public class KaleYardSerializer implements BSONSerializer<KaleYard> {
     public void writeToStream(DataOutputStream stream, KaleYard object) throws IOException {
         mapper.writeValue(stream, object);
     }

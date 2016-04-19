@@ -7,49 +7,28 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1282.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="form.Controller">
    <children>
-      <TitledPane animated="false" layoutX="17.0" layoutY="25.0" prefHeight="817.0" prefWidth="1249.0" text="Хозяйство">
+      <TitledPane animated="false" layoutX="17.0" layoutY="25.0" prefHeight="817.0" prefWidth="1227.0" text="Хозяйство">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="778.0" prefWidth="1049.0">
                <children>
                   <Button layoutX="27.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="159.0" text="Загрузить" />
                   <Button layoutX="206.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="178.0" text="Сохранить" />
-                  <TitledPane animated="false" layoutX="271.0" layoutY="50.0" prefHeight="224.0" prefWidth="204.0" text="Вырастить">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="198.0" prefWidth="339.0">
-                           <children>
-                              <Button layoutY="14.0" mnemonicParsing="false" onAction="#addVegetable" prefHeight="25.0" prefWidth="168.0" text="Посадить овощ" />
-                              <Button layoutX="168.0" layoutY="14.0" mnemonicParsing="false" onAction="#addTree" prefHeight="25.0" prefWidth="168.0" text="Посадить дерево" />
-                              <TextField fx:id="addNameField" layoutX="142.0" layoutY="99.0" prefHeight="25.0" prefWidth="172.0" />
-                              <Label layoutX="68.0" layoutY="103.0" text="Название" />
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </TitledPane>
-                  <TitledPane animated="false" layoutX="638.0" layoutY="52.0" prefHeight="220.0" prefWidth="215.0" text="Убрать">
+                  <TitledPane animated="false" layoutX="887.0" layoutY="50.0" prefHeight="362.0" prefWidth="305.0" text="Изменить дерево">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="deleteIndexField" layoutX="100.0" layoutY="134.0" prefHeight="25.0" prefWidth="38.0" text="1" />
-                              <Label layoutX="39.0" layoutY="138.0" text="Номер" />
-                              <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#removeTree" prefHeight="25.0" prefWidth="154.0" text="Убрать дерево" />
-                              <Button layoutX="14.0" layoutY="52.0" mnemonicParsing="false" onAction="#removeVegetable" prefHeight="25.0" prefWidth="154.0" text="Убрать овощ" />
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </TitledPane>
-                  <TitledPane animated="false" layoutX="902.0" layoutY="52.0" prefHeight="319.0" prefWidth="305.0" text="Изменить дерево">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="200.0">
-                           <children>
-                              <Button layoutX="54.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeTree" prefHeight="25.0" prefWidth="154.0" text="Изменить" />
-                              <TextField fx:id="treeNameField" layoutX="119.0" layoutY="122.0" />
-                              <TextField fx:id="treeHieghtField" layoutX="119.0" layoutY="164.0" />
-                              <TextField fx:id="treeAgeField" layoutX="119.0" layoutY="209.0" />
-                              <Label layoutX="43.0" layoutY="126.0" text="Название" />
-                              <Label layoutX="50.0" layoutY="168.0" text="Высота" />
-                              <Label layoutX="50.0" layoutY="213.0" text="Возраст" />
-                              <Label layoutX="84.0" layoutY="64.0" text="Номер" />
-                              <TextField fx:id="changeTreeNumberField" layoutX="132.0" layoutY="60.0" prefHeight="25.0" prefWidth="38.0" text="1" />
+                              <Button layoutX="66.0" layoutY="217.0" mnemonicParsing="false" onAction="#changeTree" prefHeight="25.0" prefWidth="154.0" text="Изменить" />
+                              <TextField fx:id="treeNameField" layoutX="115.0" layoutY="51.0" />
+                              <TextField fx:id="treeHieghtField" layoutX="115.0" layoutY="87.0" />
+                              <TextField fx:id="treeAgeField" layoutX="115.0" layoutY="124.0" />
+                              <Label layoutX="39.0" layoutY="55.0" text="Название" />
+                              <Label layoutX="46.0" layoutY="91.0" text="Высота" />
+                              <Label layoutX="44.0" layoutY="128.0" text="Возраст" />
+                              <Label layoutX="73.0" layoutY="18.0" text="Номер" />
+                              <TextField fx:id="changeTreeNumberField" layoutX="125.0" layoutY="14.0" prefHeight="25.0" prefWidth="38.0" text="1" />
+                              <Button layoutX="67.0" layoutY="250.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Добавить" />
+                              <Button layoutX="66.0" layoutY="181.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="Выбрать" />
+                              <Button layoutX="67.0" layoutY="286.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Удалить" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -58,22 +37,22 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="314.0" prefWidth="243.0">
                            <children>
-                              <TextField layoutX="84.0" layoutY="66.0" />
-                              <TextField layoutX="84.0" layoutY="113.0" />
-                              <TextField layoutX="84.0" layoutY="162.0" />
+                              <TextField fx:id="sprinklerNameField" layoutX="84.0" layoutY="66.0" />
+                              <TextField fx:id="sprinklerCapacityField" layoutX="84.0" layoutY="113.0" />
+                              <TextField fx:id="sprinklerBalanceField" layoutX="84.0" layoutY="162.0" />
                               <Label layoutX="16.0" layoutY="70.0" text="Название" />
                               <Label layoutX="20.0" layoutY="117.0" text="Емкость" />
                               <Label layoutX="1.0" layoutY="166.0" text="Осталось воды" />
-                              <TextField layoutX="84.0" layoutY="207.0" />
+                              <TextField fx:id="sprinklerPressureField" layoutX="84.0" layoutY="207.0" />
                               <Label layoutX="16.0" layoutY="211.0" text="Давление" />
-                              <Button layoutX="69.0" layoutY="255.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="Изменить" />
+                              <Button layoutX="69.0" layoutY="255.0" mnemonicParsing="false" onAction="#updateSprinklerButtonClicked" prefHeight="25.0" prefWidth="118.0" text="Изменить" />
                            </children>
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <TitledPane animated="false" layoutX="13.0" layoutY="411.0" prefHeight="348.0" prefWidth="248.0" text="Трактор">
+                  <TitledPane animated="false" layoutX="13.0" layoutY="411.0" prefHeight="370.0" prefWidth="248.0" text="Трактор">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="344.0" prefWidth="246.0">
                            <children>
                               <TextField layoutX="88.0" layoutY="69.0" />
                               <TextField layoutX="88.0" layoutY="110.0" />
@@ -86,40 +65,46 @@
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <TitledPane animated="false" layoutX="278.0" layoutY="662.0" prefHeight="103.0" prefWidth="954.0" text="Сад">
+                  <TitledPane animated="false" layoutX="278.0" layoutY="656.0" prefHeight="123.0" prefWidth="933.0" text="Сад">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="gardenLabel" layoutX="14.0" layoutY="19.0" prefHeight="39.0" prefWidth="927.0">
+                              <Label fx:id="gardenLabel" layoutX="14.0" layoutY="44.0" prefHeight="39.0" prefWidth="927.0">
                                  <font>
                                     <Font name="Courier New Bold Italic" size="16.0" />
                                  </font>
                               </Label>
+                              <Label layoutX="26.0" layoutY="11.0" text="Максимальное количество деревьев" />
+                              <TextField layoutX="241.0" layoutY="7.0" />
+                              <Button layoutX="403.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Изменить" />
                            </children>
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <TitledPane animated="false" layoutX="277.0" layoutY="551.0" prefHeight="105.0" prefWidth="953.0" text="Огород">
+                  <TitledPane animated="false" layoutX="279.0" layoutY="527.0" prefHeight="118.0" prefWidth="931.0" text="Огород">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="79.0" prefWidth="913.0">
                            <children>
-                              <Label fx:id="kailyardLabel" layoutX="14.0" layoutY="20.0" prefHeight="39.0" prefWidth="924.0">
+                              <Label fx:id="kailyardLabel" layoutX="14.0" layoutY="39.0" prefHeight="39.0" prefWidth="924.0">
                                  <font>
                                     <Font name="Courier New Bold Italic" size="16.0" />
                                  </font>
                               </Label>
+                              <Label layoutX="78.0" layoutY="12.0" text="Площадь" />
+                              <TextField layoutX="141.0" layoutY="8.0" />
+                              <Button layoutX="329.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Изменить" />
                            </children>
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <TitledPane animated="false" layoutX="277.0" layoutY="293.0" prefHeight="227.0" prefWidth="577.0" text="Изменить овощ">
+                  <TitledPane animated="false" layoutX="279.0" layoutY="50.0" prefHeight="303.0" prefWidth="577.0" text="Изменить овощ">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="vegetableNameField" layoutX="252.0" layoutY="50.0" prefHeight="25.0" prefWidth="203.0" />
                               <TextField fx:id="vegetableAging" layoutX="258.0" layoutY="88.0" prefHeight="25.0" prefWidth="202.0" />
                               <TextField fx:id="vegetableMoistureField" layoutX="257.0" layoutY="122.0" prefHeight="25.0" prefWidth="203.0" />
-                              <Button layoutX="29.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Изменить" />
+                              <Button layoutX="26.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Изменить" />
                               <Label layoutX="176.0" layoutY="54.0" text="Название" />
                               <Label layoutX="137.0" layoutY="92.0" text="Процент созревания" />
                               <Label layoutX="129.0" layoutY="134.0" text="Насыщенность влагой" />
@@ -127,6 +112,23 @@
                               <Label layoutX="54.0" layoutY="166.0" text="Количество внесенных удобрений" />
                               <TextField fx:id="changeVegetableNumberField" layoutX="334.0" layoutY="17.0" prefHeight="25.0" prefWidth="38.0" text="1" />
                               <Label layoutX="286.0" layoutY="21.0" text="Номер" />
+                              <Button layoutX="28.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="161.0" text="Добавить" />
+                              <Button layoutX="219.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Выбрать" />
+                              <Button layoutX="219.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Удалить" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <TitledPane animated="false" layoutX="278.0" layoutY="378.0" prefHeight="135.0" prefWidth="511.0" text="Склад">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button layoutX="101.0" layoutY="146.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Изменить" />
+                              <Label layoutX="30.0" layoutY="31.0" text="Вместимость" />
+                              <Label layoutX="30.0" layoutY="76.0" text="Заполненность" />
+                              <TextField layoutX="139.0" layoutY="27.0" />
+                              <TextField layoutX="139.0" layoutY="72.0" />
+                              <Button layoutX="325.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0" text="Изменить" />
                            </children>
                         </AnchorPane>
                     </content>

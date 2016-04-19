@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by Evgeny Shilov on 02.04.2016.
  */
-public interface BSONSerializer<T extends serialization.Serializable> {
+public interface BSONSerializer<T> {
     ObjectMapper mapper = new ObjectMapper(new BsonFactory());
 
     void writeToStream(DataOutputStream stream, T object) throws IOException;
