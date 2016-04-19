@@ -1,35 +1,18 @@
 package entities.containers;
 
-import entities.plants.Tree;
 import serialization.Serializable;
-
-import java.util.ArrayList;
 
 /**
  * Created by Evgeny Shilov on 01.04.2016.
  */
 public class Garden implements Serializable {
-    private ArrayList<Tree> trees;
+    private int maxTreesAmount;
 
-    public Garden() {
-        trees = new ArrayList<Tree>();
+    public int getMaxTreesAmount() {
+        return maxTreesAmount;
     }
 
-    public void deletePlant(int index) {
-        if (isInRange(index)) {
-            trees.remove(index - 1);
-        }
-    }
-
-    public void addTree(Tree tree) {
-        trees.add(tree);
-    }
-
-    private boolean isInRange(int index) {
-        return (index > 0) && (index <= trees.size());
-    }
-
-    public ArrayList<Tree> getTrees() {
-        return trees;
+    public void setMaxTreesAmount(int maxTreesAmount) {
+        this.maxTreesAmount = maxTreesAmount;
     }
 }
