@@ -1,11 +1,9 @@
 package entities.equipment;
 
-import serialization.Serializable;
-
 /**
  * Created by Evgeny Shilov on 02.04.2016.
  */
-public class Sprinkler implements Serializable {
+public class Sprinkler {
     private String name;
     private double capacity;
     private double waterBalance;
