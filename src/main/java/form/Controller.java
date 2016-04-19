@@ -21,6 +21,11 @@ public class Controller {
     public TextField sprinklerCapacityField;
     public TextField sprinklerBalanceField;
     public TextField sprinklerPressureField;
+    public TextField tractorNameField;
+    public TextField tractorPowerField;
+    public TextField tractorFuelField;
+    public TextField stockCapacityField;
+    public TextField stockOccupancyField;
 
     private Garden garden = new Garden();
     private KaleYard kaleYard = new KaleYard();
@@ -75,6 +80,43 @@ public class Controller {
             sprinkler.setCapacity(newCapacity);
             sprinkler.setPressure(newPressure);
             sprinkler.setWaterBalance(newBalance);
+
+            new Alert(Alert.AlertType.INFORMATION, "Данные поливалки изменены").showAndWait()
+                    .filter(response -> response == ButtonType.OK);
+        } catch (NumberFormatException ex) {
+            new Alert(Alert.AlertType.ERROR, "Введены неверные данные").showAndWait()
+                    .filter(response -> response == ButtonType.OK);
+        }
+    }
+
+    public void updateTractorButtonClicked(ActionEvent actionEvent) {
+        try {
+            String newName = tractorNameField.getText();
+            double newFuelBalance = Double.parseDouble(tractorFuelField.getText());
+            double newPower = Double.parseDouble(tractorPowerField.getText());
+
+            tractor.setName(newName);
+            tractor.setFuelBalance(newFuelBalance);
+            tractor.setPower(newPower);
+
+            new Alert(Alert.AlertType.INFORMATION, "Данные трактора изменены").showAndWait()
+                    .filter(response -> response == ButtonType.OK);
+        } catch (NumberFormatException ex) {
+            new Alert(Alert.AlertType.ERROR, "Введены неверные данные").showAndWait()
+                    .filter(response -> response == ButtonType.OK);
+        }
+    }
+
+    public void updateStockButtonClicked(ActionEvent actionEvent) {
+        try {
+            int newCapacity = Integer.parseInt(stockCapacityField.getText());
+            int newOccupancy = Integer.parseInt(stockOccupancyField.getText());
+
+            stock.setCapacity(newCapacity);
+            stock.setOccupancy(newOccupancy);
+
+            new Alert(Alert.AlertType.INFORMATION, "Данные склада изменены").showAndWait()
+                    .filter(response -> response == ButtonType.OK);
         } catch (NumberFormatException ex) {
             new Alert(Alert.AlertType.ERROR, "Введены неверные данные").showAndWait()
                     .filter(response -> response == ButtonType.OK);

@@ -54,13 +54,13 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="344.0" prefWidth="246.0">
                            <children>
-                              <TextField layoutX="88.0" layoutY="69.0" />
-                              <TextField layoutX="88.0" layoutY="110.0" />
-                              <TextField layoutX="88.0" layoutY="156.0" />
+                              <TextField fx:id="tractorNameField" layoutX="88.0" layoutY="69.0" />
+                              <TextField fx:id="tractorPowerField" layoutX="88.0" layoutY="110.0" />
+                              <TextField fx:id="tractorFuelField" layoutX="88.0" layoutY="156.0" />
                               <Label layoutX="22.0" layoutY="73.0" text="Название" />
                               <Label layoutX="20.0" layoutY="114.0" text="Мощность" />
                               <Label layoutX="9.0" layoutY="160.0" text="Запас топлива" />
-                              <Button layoutX="54.0" layoutY="229.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="Изменить" />
+                              <Button layoutX="54.0" layoutY="229.0" mnemonicParsing="false" onAction="#updateTractorButtonClicked" prefHeight="25.0" prefWidth="160.0" text="Изменить" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -126,9 +126,9 @@
                               <Button layoutX="101.0" layoutY="146.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Изменить" />
                               <Label layoutX="30.0" layoutY="31.0" text="Вместимость" />
                               <Label layoutX="30.0" layoutY="76.0" text="Заполненность" />
-                              <TextField layoutX="139.0" layoutY="27.0" />
-                              <TextField layoutX="139.0" layoutY="72.0" />
-                              <Button layoutX="325.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0" text="Изменить" />
+                              <TextField fx:id="stockCapacityField" layoutX="139.0" layoutY="27.0" />
+                              <TextField fx:id="stockOccupancyField" layoutX="139.0" layoutY="72.0" />
+                              <Button layoutX="325.0" layoutY="27.0" mnemonicParsing="false" onAction="#updateStockButtonClicked" prefHeight="25.0" prefWidth="132.0" text="Изменить" />
                            </children>
                         </AnchorPane>
                     </content>
