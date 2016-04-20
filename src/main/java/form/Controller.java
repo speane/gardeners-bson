@@ -5,9 +5,12 @@ import entities.containers.KaleYard;
 import entities.containers.Stock;
 import entities.equipment.Sprinkler;
 import entities.equipment.Tractor;
+import entities.plants.Vegetable;
+import exceptions.IncorrectItemNumberException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
@@ -26,6 +29,12 @@ public class Controller {
     public TextField tractorFuelField;
     public TextField stockCapacityField;
     public TextField stockOccupancyField;
+    public TextField vegetableIndexField;
+    public TextField vegetableNameField;
+    public TextField vegetableAgingField;
+    public TextField vegetableMoistureField;
+    public TextField vegetableFertilizersField;
+    public Label kaleYardLabel;
 
     private Garden garden = new Garden();
     private KaleYard kaleYard = new KaleYard();
@@ -45,8 +54,18 @@ public class Controller {
     }
 
     private void updateInfo() {
-
+        printKaleYard();
     }
+
+    private void printKaleYard() {
+        kaleYardLabel.setText("");
+        String vegetableString = "";
+        for (Vegetable vegetable : kaleYard.getItemList()) {
+            vegetableString += vegetable;
+        }
+        kaleYardLabel.setText(vegetableString);
+    }
+
     private int getIntFromField(TextField textField) {
         return Integer.parseInt(textField.getText());
     }
@@ -121,5 +140,40 @@ public class Controller {
             new Alert(Alert.AlertType.ERROR, "Введены неверные данные").showAndWait()
                     .filter(response -> response == ButtonType.OK);
         }
+    }
+
+    public void selectVegetableButtonClicked(ActionEvent actionEvent) {
+        try {
+            int index = Integer.parseInt(vegetableIndexField.getText());
+            Vegetable vegetable = kaleYard.get(index - 1);
+
+            vegetableNameField.setText(vegetable.getName());
+            vegetableAgingField.setText("" + vegetable.getAging());
+            vegetableFertilizersField.setText("" + vegetable.getFertilizers());
+            vegetableMoistureField.setText("" + vegetable.getMoisture());
+        } catch (IncorrectItemNumberException | NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Неверный номер растения").showAndWait()
+                    .filter(response -> response == ButtonType.OK);
+        }
+    }
+
+    public void addVegetableButtonClicked(ActionEvent actionEvent) {
+        try {
+            String name = vegetableNameField.getText();
+            int fertilizers = Integer.parseInt(vegetableFertilizersField.getText());
+            int moisture = Integer.parseInt(vegetableMoistureField.getText());
+            int aging = Integer.parseInt(vegetableAgingField.getText());
+
+            kaleYard.add(new Vegetable(name, fertilizers, moisture, aging));
+            showAlert(Alert.AlertType.INFORMATION, "Растение добавлено");
+            updateInfo();
+        } catch (NumberFormatException ex) {
+            showAlert(Alert.AlertType.ERROR, "Неверно введены данные растения");
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String message) {
+        new Alert(alertType, message).showAndWait()
+                .filter(response -> response == ButtonType.OK);
     }
 }

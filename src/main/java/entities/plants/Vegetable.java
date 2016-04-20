@@ -7,13 +7,13 @@ public class Vegetable {
     private String name;
     private int fertilizers;
     private int moisture;
-    private int mellowing;
+    private int aging;
 
-    public Vegetable(String name, int fertilizers, int moisture, int mellowing) {
+    public Vegetable(String name, int fertilizers, int moisture, int aging) {
         this.name = name;
         this.fertilizers = fertilizers;
         this.moisture = moisture;
-        this.mellowing = mellowing;
+        this.aging = aging;
     }
 
     public Vegetable() {
@@ -44,11 +44,15 @@ public class Vegetable {
         this.moisture = moisture;
     }
 
-    public int getMellowing() {
-        return mellowing;
+    public int getAging() {
+        return aging;
     }
 
-    public void setMellowing(int mellowing) {
-        this.mellowing = mellowing;
+    public void setAging(int aging) {
+        this.aging = aging;
+    }
+
+    public String toString() {
+        return "[" + name + "(" + fertilizers + ", " + moisture + "%, " + aging + ")]";
     }
 }
