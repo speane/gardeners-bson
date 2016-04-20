@@ -12,9 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
-
-import java.io.File;
 
 /**
  * Created by Evgeny Shilov on 01.04.2016.
@@ -42,17 +39,6 @@ public class Controller {
     private Sprinkler sprinkler = new Sprinkler();
     private Stock stock = new Stock();
 
-
-    public void addTree(ActionEvent actionEvent) {
-        /*garden
-        updateInfo();*/
-    }
-
-    public void addVegetable(ActionEvent actionEvent) {
-        //farm.garden.addPlant(new Crop(Integer.parseInt(addPlantSizeField.getText())));
-        updateInfo();
-    }
-
     private void updateInfo() {
         printKaleYard();
     }
@@ -64,28 +50,6 @@ public class Controller {
             vegetableString += vegetable;
         }
         kaleYardLabel.setText(vegetableString);
-    }
-
-    private int getIntFromField(TextField textField) {
-        return Integer.parseInt(textField.getText());
-    }
-    private File chooseSaveFile() {
-        return new FileChooser().showSaveDialog(null);
-    }
-    private File chooseOpenFile() {
-        return new FileChooser().showOpenDialog(null);
-    }
-
-    public void changeTree(ActionEvent actionEvent) {
-
-    }
-
-    public void removeTree(ActionEvent actionEvent) {
-
-    }
-
-    public void removeVegetable(ActionEvent actionEvent) {
-
     }
 
     public void updateSprinklerButtonClicked(ActionEvent actionEvent) {
