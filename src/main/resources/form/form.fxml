@@ -19,13 +19,13 @@
                            <children>
                               <Button layoutX="68.0" layoutY="256.0" mnemonicParsing="false" onAction="#updateTreeButtonClicked" prefHeight="25.0" prefWidth="154.0" text="Изменить" />
                               <TextField fx:id="treeNameField" layoutX="115.0" layoutY="51.0" />
-                              <TextField fx:id="treeHieghtField" layoutX="115.0" layoutY="87.0" />
+                              <TextField fx:id="treeHeightField" layoutX="115.0" layoutY="87.0" />
                               <TextField fx:id="treeAgeField" layoutX="115.0" layoutY="124.0" />
                               <Label layoutX="39.0" layoutY="55.0" text="Название" />
                               <Label layoutX="46.0" layoutY="91.0" text="Высота" />
                               <Label layoutX="44.0" layoutY="128.0" text="Возраст" />
                               <Label layoutX="73.0" layoutY="18.0" text="Номер" />
-                              <TextField fx:id="changeTreeNumberField" layoutX="125.0" layoutY="14.0" prefHeight="25.0" prefWidth="38.0" text="1" />
+                              <TextField fx:id="treeIndexField" layoutX="125.0" layoutY="14.0" prefHeight="25.0" prefWidth="38.0" text="1" />
                               <Button layoutX="68.0" layoutY="314.0" mnemonicParsing="false" onAction="#insertTreeButtonClicked" prefHeight="25.0" prefWidth="153.0" text="Добавить" />
                               <Button layoutX="67.0" layoutY="196.0" mnemonicParsing="false" onAction="#selectTreeButtonClicked" prefHeight="25.0" prefWidth="154.0" text="Выбрать" />
                               <Button layoutX="68.0" layoutY="374.0" mnemonicParsing="false" onAction="#deleteTreeButtonClicked" prefHeight="25.0" prefWidth="153.0" text="Удалить" />

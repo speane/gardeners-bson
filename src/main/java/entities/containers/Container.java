@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by Evgeny Shilov on 20.04.2016.
  */
-public class Container<T> {
+public abstract class Container<T> {
     ArrayList<T> items;
 
     public Container() {
@@ -36,5 +36,13 @@ public class Container<T> {
         } catch (IndexOutOfBoundsException ex) {
             throw new IncorrectItemNumberException();
         }
+    }
+
+    public String toString() {
+        String result = "";
+        for (T item : items) {
+            result += item;
+        }
+        return result;
     }
 }

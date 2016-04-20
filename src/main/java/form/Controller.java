@@ -5,13 +5,11 @@ import entities.containers.KaleYard;
 import entities.containers.Stock;
 import entities.equipment.Sprinkler;
 import entities.equipment.Tractor;
+import entities.plants.Tree;
 import entities.plants.Vegetable;
 import exceptions.IncorrectItemNumberException;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 /**
  * Created by Evgeny Shilov on 01.04.2016.
@@ -34,6 +32,11 @@ public class Controller {
     public Label kaleYardLabel;
     public TextField treeAmountField;
     public TextField kaleYardAreaField;
+    public TextField treeNameField;
+    public TextField treeHeightField;
+    public TextField treeAgeField;
+    public Label gardenLabel;
+    public TextField treeIndexField;
 
     private Garden garden = new Garden();
     private KaleYard kaleYard = new KaleYard();
@@ -46,12 +49,11 @@ public class Controller {
     }
 
     private void printKaleYard() {
-        kaleYardLabel.setText("");
-        String vegetableString = "";
-        for (Vegetable vegetable : kaleYard.getItemList()) {
-            vegetableString += vegetable;
-        }
-        kaleYardLabel.setText(vegetableString);
+        kaleYardLabel.setText(kaleYard.toString());
+    }
+
+    private void printGarden() {
+        gardenLabel.setText(garden.toString());
     }
 
     public void updateSprinklerButtonClicked(ActionEvent actionEvent) {
@@ -117,6 +119,8 @@ public class Controller {
             vegetableAgingField.setText("" + vegetable.getAging());
             vegetableFertilizersField.setText("" + vegetable.getFertilizers());
             vegetableMoistureField.setText("" + vegetable.getMoisture());
+
+            showAlert(Alert.AlertType.INFORMATION, "Растение " + index + " выбано");
         } catch (IncorrectItemNumberException | NumberFormatException e) {
             new Alert(Alert.AlertType.ERROR, "Неверный номер растения").showAndWait()
                     .filter(response -> response == ButtonType.OK);
@@ -184,11 +188,34 @@ public class Controller {
     }
 
     public void insertTreeButtonClicked(ActionEvent actionEvent) {
+        try {
+            String name = treeNameField.getText();
+            int height = Integer.parseInt(treeHeightField.getText());
+            int age = Integer.parseInt(treeAgeField.getText());
 
+            Tree tree = new Tree(name, height, age);
+            garden.add(tree);
+            printGarden();
+            showAlert(Alert.AlertType.INFORMATION, "Дерево добавлено");
+        } catch (NumberFormatException ex) {
+            showAlert(Alert.AlertType.ERROR, "Неверные данные");
+        }
     }
 
     public void selectTreeButtonClicked(ActionEvent actionEvent) {
+        try {
+            int index = Integer.parseInt(treeIndexField.getText());
 
+            Tree tree = garden.get(index - 1);
+
+            treeNameField.setText(tree.getName());
+            treeAgeField.setText("" + tree.getAge());
+            treeHeightField.setText("" + tree.getHeight());
+
+            showAlert(Alert.AlertType.INFORMATION, "Дерево " + index + " выбрано");
+        } catch (IncorrectItemNumberException | NumberFormatException ex) {
+            showAlert(Alert.AlertType.ERROR, "Неверный индекс");
+        }
     }
 
     public void deleteTreeButtonClicked(ActionEvent actionEvent) {
