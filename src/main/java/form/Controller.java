@@ -176,4 +176,40 @@ public class Controller {
         new Alert(alertType, message).showAndWait()
                 .filter(response -> response == ButtonType.OK);
     }
+
+    public void updateVegetableButtonClicked(ActionEvent actionEvent) {
+        try {
+            int index = Integer.parseInt(vegetableIndexField.getText());
+
+            Vegetable vegetable = kaleYard.get(index - 1);
+
+            String name = vegetableNameField.getText();
+            int fertilizers = Integer.parseInt(vegetableFertilizersField.getText());
+            int moisture = Integer.parseInt(vegetableMoistureField.getText());
+            int aging = Integer.parseInt(vegetableAgingField.getText());
+
+            vegetable.setName(name);
+            vegetable.setAging(aging);
+            vegetable.setMoisture(moisture);
+            vegetable.setFertilizers(fertilizers);
+
+            showAlert(Alert.AlertType.INFORMATION, "Растение №" + index + " изменено");
+            updateInfo();
+        } catch (IncorrectItemNumberException ex) {
+            showAlert(Alert.AlertType.ERROR, "Неверный индекс");
+        } catch (NumberFormatException ex) {
+            showAlert(Alert.AlertType.ERROR, "Неверные данные");
+        }
+    }
+
+    public void removeVegetableButtonClicked(ActionEvent actionEvent) {
+        try {
+            int index = Integer.parseInt(vegetableIndexField.getText());
+            kaleYard.remove(index - 1);
+            showAlert(Alert.AlertType.INFORMATION, "Растение №" + index + " удалено");
+            updateInfo();
+        } catch (IncorrectItemNumberException | NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Неверный индекс");
+        }
+    }
 }
