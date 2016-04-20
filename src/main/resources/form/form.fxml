@@ -17,7 +17,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="200.0">
                            <children>
-                              <Button layoutX="68.0" layoutY="256.0" mnemonicParsing="false" onAction="#changeTree" prefHeight="25.0" prefWidth="154.0" text="Изменить" />
+                              <Button layoutX="68.0" layoutY="256.0" mnemonicParsing="false" onAction="#updateTreeButtonClicked" prefHeight="25.0" prefWidth="154.0" text="Изменить" />
                               <TextField fx:id="treeNameField" layoutX="115.0" layoutY="51.0" />
                               <TextField fx:id="treeHieghtField" layoutX="115.0" layoutY="87.0" />
                               <TextField fx:id="treeAgeField" layoutX="115.0" layoutY="124.0" />
@@ -26,9 +26,9 @@
                               <Label layoutX="44.0" layoutY="128.0" text="Возраст" />
                               <Label layoutX="73.0" layoutY="18.0" text="Номер" />
                               <TextField fx:id="changeTreeNumberField" layoutX="125.0" layoutY="14.0" prefHeight="25.0" prefWidth="38.0" text="1" />
-                              <Button layoutX="68.0" layoutY="314.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Добавить" />
-                              <Button layoutX="67.0" layoutY="196.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="Выбрать" />
-                              <Button layoutX="68.0" layoutY="374.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Удалить" />
+                              <Button layoutX="68.0" layoutY="314.0" mnemonicParsing="false" onAction="#insertTreeButtonClicked" prefHeight="25.0" prefWidth="153.0" text="Добавить" />
+                              <Button layoutX="67.0" layoutY="196.0" mnemonicParsing="false" onAction="#selectTreeButtonClicked" prefHeight="25.0" prefWidth="154.0" text="Выбрать" />
+                              <Button layoutX="68.0" layoutY="374.0" mnemonicParsing="false" onAction="#deleteTreeButtonClicked" prefHeight="25.0" prefWidth="153.0" text="Удалить" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -76,7 +76,7 @@
                               </Label>
                               <Label layoutX="26.0" layoutY="11.0" text="Максимальное количество деревьев" />
                               <TextField fx:id="treeAmountField" layoutX="241.0" layoutY="7.0" />
-                              <Button layoutX="403.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Изменить" />
+                              <Button layoutX="403.0" layoutY="7.0" mnemonicParsing="false" onAction="#updateGardenButtonClicked" prefHeight="25.0" prefWidth="135.0" text="Изменить" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -92,7 +92,7 @@
                               </Label>
                               <Label layoutX="78.0" layoutY="12.0" text="Площадь" />
                               <TextField fx:id="kaleYardAreaField" layoutX="141.0" layoutY="8.0" />
-                              <Button layoutX="329.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Изменить" />
+                              <Button layoutX="329.0" layoutY="8.0" mnemonicParsing="false" onAction="#updateKaleYardButtonClicked" prefHeight="25.0" prefWidth="115.0" text="Изменить" />
                            </children>
                         </AnchorPane>
                     </content>

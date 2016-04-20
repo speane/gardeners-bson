@@ -32,6 +32,8 @@ public class Controller {
     public TextField vegetableMoistureField;
     public TextField vegetableFertilizersField;
     public Label kaleYardLabel;
+    public TextField treeAmountField;
+    public TextField kaleYardAreaField;
 
     private Garden garden = new Garden();
     private KaleYard kaleYard = new KaleYard();
@@ -175,5 +177,55 @@ public class Controller {
         } catch (IncorrectItemNumberException | NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Неверный индекс");
         }
+    }
+
+    public void updateTreeButtonClicked(ActionEvent actionEvent) {
+
+    }
+
+    public void insertTreeButtonClicked(ActionEvent actionEvent) {
+
+    }
+
+    public void selectTreeButtonClicked(ActionEvent actionEvent) {
+
+    }
+
+    public void deleteTreeButtonClicked(ActionEvent actionEvent) {
+
+    }
+
+    public void updateGardenButtonClicked(ActionEvent actionEvent) {
+        try {
+            int amount = Integer.parseInt(treeAmountField.getText());
+
+            garden.setMaxTreesAmount(amount);
+
+            showAlert(Alert.AlertType.INFORMATION, "Максимальное количество деревьев изменено");
+        } catch (NumberFormatException ex) {
+            showAlert(Alert.AlertType.ERROR, "Неверные данные");
+            showGardenInfo();
+        }
+    }
+
+    private void showGardenInfo() {
+        treeAmountField.setText("" + garden.getMaxTreesAmount());
+    }
+
+    public void updateKaleYardButtonClicked(ActionEvent actionEvent) {
+        try {
+            int area = Integer.parseInt(kaleYardAreaField.getText());
+
+            kaleYard.setArea(area);
+
+            showAlert(Alert.AlertType.INFORMATION, "Площадь огорода изменена");
+        } catch (NumberFormatException ex) {
+            showAlert(Alert.AlertType.ERROR, "Неверные данные");
+            showKaleYardInfo();
+        }
+    }
+
+    private void showKaleYardInfo() {
+        kaleYardAreaField.setText("" + kaleYard.getArea());
     }
 }
