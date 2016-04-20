@@ -7,7 +7,6 @@ import entities.equipment.Sprinkler;
 import entities.equipment.Tractor;
 import entities.plants.Tree;
 import entities.plants.Vegetable;
-import exceptions.IncorrectItemNumberException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
@@ -24,7 +23,6 @@ public class Controller {
     public TextField tractorFuelField;
     public TextField stockCapacityField;
     public TextField stockOccupancyField;
-    public TextField vegetableIndexField;
     public TextField vegetableNameField;
     public TextField vegetableAgingField;
     public TextField vegetableMoistureField;
@@ -36,7 +34,8 @@ public class Controller {
     public TextField treeHeightField;
     public TextField treeAgeField;
     public Label gardenLabel;
-    public TextField treeIndexField;
+    public ComboBox vegetableComboBox;
+    public ComboBox treeComboBox;
 
     private Garden garden = new Garden();
     private KaleYard kaleYard = new KaleYard();
@@ -44,16 +43,57 @@ public class Controller {
     private Sprinkler sprinkler = new Sprinkler();
     private Stock stock = new Stock();
 
-    private void updateInfo() {
+    public void loadInfo() {
+        printAll();
+    }
+
+    public void printAll() {
         printKaleYard();
+        printGarden();
+        printTractor();
+        printSprinkler();
+        printStock();
     }
 
     private void printKaleYard() {
+        printKaleYardContent();
+        printKaleYardInfo();
+    }
+
+    private void printKaleYardContent() {
         kaleYardLabel.setText(kaleYard.toString());
     }
 
     private void printGarden() {
+        printGardenContent();
+        printGardenInfo();
+    }
+
+    private void printGardenContent() {
         gardenLabel.setText(garden.toString());
+    }
+
+    private void printTractor() {
+        tractorFuelField.setText("" + tractor.getFuelBalance());
+        tractorNameField.setText(tractor.getName());
+        tractorPowerField.setText("" + tractor.getPower());
+    }
+
+    private void printSprinkler() {
+        sprinklerNameField.setText(sprinkler.getName());
+        sprinklerCapacityField.setText("" + sprinkler.getCapacity());
+        sprinklerPressureField.setText("" + sprinkler.getPressure());
+        sprinklerBalanceField.setText("" + sprinkler.getWaterBalance());
+    }
+
+    private void printStock() {
+        stockCapacityField.setText("" + stock.getCapacity());
+        stockOccupancyField.setText("" + stock.getOccupancy());
+    }
+
+    private void showAlert(Alert.AlertType alertType, String message) {
+        new Alert(alertType, message).showAndWait()
+                .filter(response -> response == ButtonType.OK);
     }
 
     public void updateSprinklerButtonClicked(ActionEvent actionEvent) {
@@ -110,23 +150,6 @@ public class Controller {
         }
     }
 
-    public void selectVegetableButtonClicked(ActionEvent actionEvent) {
-        try {
-            int index = Integer.parseInt(vegetableIndexField.getText());
-            Vegetable vegetable = kaleYard.get(index - 1);
-
-            vegetableNameField.setText(vegetable.getName());
-            vegetableAgingField.setText("" + vegetable.getAging());
-            vegetableFertilizersField.setText("" + vegetable.getFertilizers());
-            vegetableMoistureField.setText("" + vegetable.getMoisture());
-
-            showAlert(Alert.AlertType.INFORMATION, "Растение " + index + " выбано");
-        } catch (IncorrectItemNumberException | NumberFormatException e) {
-            new Alert(Alert.AlertType.ERROR, "Неверный номер растения").showAndWait()
-                    .filter(response -> response == ButtonType.OK);
-        }
-    }
-
     public void addVegetableButtonClicked(ActionEvent actionEvent) {
         try {
             String name = vegetableNameField.getText();
@@ -134,24 +157,22 @@ public class Controller {
             int moisture = Integer.parseInt(vegetableMoistureField.getText());
             int aging = Integer.parseInt(vegetableAgingField.getText());
 
-            kaleYard.add(new Vegetable(name, fertilizers, moisture, aging));
+            Vegetable newVegetable = new Vegetable(name, fertilizers, moisture, aging);
+            kaleYard.add(newVegetable);
+
+            printKaleYardContent();
+            vegetableComboBox.getItems().add(newVegetable);
+            vegetableComboBox.getSelectionModel().select(newVegetable);
+
             showAlert(Alert.AlertType.INFORMATION, "Растение добавлено");
-            updateInfo();
         } catch (NumberFormatException ex) {
             showAlert(Alert.AlertType.ERROR, "Неверно введены данные растения");
         }
     }
 
-    private void showAlert(Alert.AlertType alertType, String message) {
-        new Alert(alertType, message).showAndWait()
-                .filter(response -> response == ButtonType.OK);
-    }
-
     public void updateVegetableButtonClicked(ActionEvent actionEvent) {
         try {
-            int index = Integer.parseInt(vegetableIndexField.getText());
-
-            Vegetable vegetable = kaleYard.get(index - 1);
+            Vegetable vegetable = getSelectedVegetable();
 
             String name = vegetableNameField.getText();
             int fertilizers = Integer.parseInt(vegetableFertilizersField.getText());
@@ -163,28 +184,50 @@ public class Controller {
             vegetable.setMoisture(moisture);
             vegetable.setFertilizers(fertilizers);
 
-            showAlert(Alert.AlertType.INFORMATION, "Растение №" + index + " изменено");
-            updateInfo();
-        } catch (IncorrectItemNumberException ex) {
-            showAlert(Alert.AlertType.ERROR, "Неверный индекс");
+            vegetableComboBox.getSelectionModel().clearSelection();
+            vegetableComboBox.getSelectionModel().select(vegetable);
+            printKaleYardContent();
         } catch (NumberFormatException ex) {
             showAlert(Alert.AlertType.ERROR, "Неверные данные");
+        } catch (NullPointerException ex) {
+            showAlert(Alert.AlertType.ERROR, "Не выбран овощ");
         }
     }
 
     public void removeVegetableButtonClicked(ActionEvent actionEvent) {
         try {
-            int index = Integer.parseInt(vegetableIndexField.getText());
-            kaleYard.remove(index - 1);
-            showAlert(Alert.AlertType.INFORMATION, "Растение №" + index + " удалено");
-            updateInfo();
-        } catch (IncorrectItemNumberException | NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Неверный индекс");
+            Vegetable vegetable = getSelectedVegetable();
+            if (vegetable == null) throw new NullPointerException();
+            kaleYard.remove(vegetable);
+            vegetableComboBox.getItems().remove(vegetable);
+            vegetableComboBox.getSelectionModel().selectFirst();
+            printKaleYardContent();
+        } catch (NullPointerException e) {
+            showAlert(Alert.AlertType.ERROR, "Не выбран овощ");
         }
     }
 
     public void updateTreeButtonClicked(ActionEvent actionEvent) {
+        try {
+            Tree tree = getSelectedTree();
 
+            String name = treeNameField.getText();
+            int height = Integer.parseInt(treeHeightField.getText());
+            int age = Integer.parseInt(treeAgeField.getText());
+
+            tree.setAge(age);
+            tree.setName(name);
+            tree.setHeight(height);
+
+            treeComboBox.getSelectionModel().clearSelection();
+            treeComboBox.getSelectionModel().select(tree);
+
+            printGardenContent();
+        } catch (NullPointerException ex) {
+            showAlert(Alert.AlertType.ERROR, "Не выбрано дерево");
+        } catch (NumberFormatException ex) {
+            showAlert(Alert.AlertType.ERROR, "Неверно введенные данные");
+        }
     }
 
     public void insertTreeButtonClicked(ActionEvent actionEvent) {
@@ -195,31 +238,28 @@ public class Controller {
 
             Tree tree = new Tree(name, height, age);
             garden.add(tree);
-            printGarden();
+            treeComboBox.getItems().add(tree);
+            treeComboBox.getSelectionModel().select(tree);
+            printGardenContent();
             showAlert(Alert.AlertType.INFORMATION, "Дерево добавлено");
         } catch (NumberFormatException ex) {
             showAlert(Alert.AlertType.ERROR, "Неверные данные");
         }
     }
 
-    public void selectTreeButtonClicked(ActionEvent actionEvent) {
-        try {
-            int index = Integer.parseInt(treeIndexField.getText());
-
-            Tree tree = garden.get(index - 1);
-
-            treeNameField.setText(tree.getName());
-            treeAgeField.setText("" + tree.getAge());
-            treeHeightField.setText("" + tree.getHeight());
-
-            showAlert(Alert.AlertType.INFORMATION, "Дерево " + index + " выбрано");
-        } catch (IncorrectItemNumberException | NumberFormatException ex) {
-            showAlert(Alert.AlertType.ERROR, "Неверный индекс");
-        }
-    }
-
     public void deleteTreeButtonClicked(ActionEvent actionEvent) {
+        try {
+            Tree tree = getSelectedTree();
+            if (tree == null) throw new NullPointerException();
 
+            garden.remove(tree);
+            treeComboBox.getItems().remove(tree);
+
+            treeComboBox.getSelectionModel().selectFirst();
+            printGardenContent();
+        } catch (NullPointerException ex) {
+            showAlert(Alert.AlertType.ERROR, "Не выбрано дерево");
+        }
     }
 
     public void updateGardenButtonClicked(ActionEvent actionEvent) {
@@ -231,11 +271,11 @@ public class Controller {
             showAlert(Alert.AlertType.INFORMATION, "Максимальное количество деревьев изменено");
         } catch (NumberFormatException ex) {
             showAlert(Alert.AlertType.ERROR, "Неверные данные");
-            showGardenInfo();
+            printGardenInfo();
         }
     }
 
-    private void showGardenInfo() {
+    private void printGardenInfo() {
         treeAmountField.setText("" + garden.getMaxTreesAmount());
     }
 
@@ -248,11 +288,39 @@ public class Controller {
             showAlert(Alert.AlertType.INFORMATION, "Площадь огорода изменена");
         } catch (NumberFormatException ex) {
             showAlert(Alert.AlertType.ERROR, "Неверные данные");
-            showKaleYardInfo();
+            printKaleYardInfo();
         }
     }
 
-    private void showKaleYardInfo() {
+    private void printKaleYardInfo() {
         kaleYardAreaField.setText("" + kaleYard.getArea());
+    }
+
+    public Vegetable getSelectedVegetable() {
+        return (Vegetable) vegetableComboBox.getSelectionModel().getSelectedItem();
+    }
+
+    public Tree getSelectedTree() {
+        return (Tree) treeComboBox.getSelectionModel().getSelectedItem();
+    }
+
+    public void vegetableSelect(ActionEvent actionEvent) {
+        Vegetable vegetable = getSelectedVegetable();
+
+        if (vegetable != null) {
+            vegetableNameField.setText(vegetable.getName());
+            vegetableAgingField.setText("" + vegetable.getAging());
+            vegetableFertilizersField.setText("" + vegetable.getFertilizers());
+            vegetableMoistureField.setText("" + vegetable.getMoisture());
+        }
+    }
+
+    public void treeSelect(ActionEvent actionEvent) {
+        Tree tree = getSelectedTree();
+        if (tree != null) {
+            treeAgeField.setText("" + tree.getAge());
+            treeNameField.setText(tree.getName());
+            treeHeightField.setText("" + tree.getHeight());
+        }
     }
 }

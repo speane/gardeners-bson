@@ -1,11 +1,9 @@
 package entities.equipment;
 
-import serialization.Serializable;
-
 /**
  * Created by Evgeny Shilov on 02.04.2016.
  */
-public class Tractor implements Serializable {
+public class Tractor {
     private String name;
     private double power;
     private double fuelBalance;

@@ -21,12 +21,16 @@ public abstract class Container<T> {
     public void remove(int index) throws IncorrectItemNumberException {
         try {
             items.remove(index);
-        } catch (ArrayIndexOutOfBoundsException ex) {
+        } catch (IndexOutOfBoundsException ex) {
             throw new IncorrectItemNumberException();
         }
     }
 
-    public ArrayList<T> getItemList() {
+    public void remove(T item) {
+        items.remove(item);
+    }
+
+    public ArrayList<T> getItems() {
         return items;
     }
 

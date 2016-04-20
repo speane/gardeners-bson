@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * Created by Evgeny Shilov on 01.04.2016.
@@ -12,7 +13,13 @@ import javafx.stage.Stage;
 public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/form/form.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("/form/form.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/form/form.fxml"));
+        Parent root = loader.load();
+        Controller controller = loader.getController();
+
+        primaryStage.addEventHandler(WindowEvent.WINDOW_SHOWN, event -> controller.loadInfo());
+
         primaryStage.setTitle("Gardeners");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
