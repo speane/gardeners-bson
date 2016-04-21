@@ -19,7 +19,7 @@ public class MainApplication extends Application {
         Controller controller = loader.getController();
 
         primaryStage.addEventHandler(WindowEvent.WINDOW_SHOWN, event -> controller.loadInfo());
-
+        primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, event -> controller.saveInfo());
         primaryStage.setTitle("Gardeners");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

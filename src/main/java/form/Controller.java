@@ -10,9 +10,11 @@ import entities.plants.Vegetable;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import serialization.serializers.Serializer;
+import serialization.FileInputSerializingStream;
+import serialization.FileOutputSerializingStream;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Evgeny Shilov on 01.04.2016.
@@ -47,13 +49,22 @@ public class Controller {
     private Sprinkler sprinkler = new Sprinkler();
     private Stock stock = new Stock();
 
+    private final String LOAD_FILE_LOCATION = "savings/save.farm";
+
     public void loadInfo() {
+        File fileToLoad = new File(LOAD_FILE_LOCATION);
+        if (fileToLoad.exists()) {
+            loadResoursesFromFile(fileToLoad);
+        }
+        else {
+            System.out.println("WRD");
+        }
         printAll();
     }
 
-    public void ser() throws IOException {
-       /* Serializer serializer = new Serializer(null, null);
-        Tree tree = serializer.deserialize(Tree.class);*/
+    public void saveInfo() {
+        File fileToSave = new File(LOAD_FILE_LOCATION);
+        saveResoursesToFile(fileToSave);
     }
 
     public void printAll() {
@@ -67,6 +78,19 @@ public class Controller {
     private void printKaleYard() {
         printKaleYardContent();
         printKaleYardInfo();
+        loadVegetableComboBox();
+    }
+
+    private void loadVegetableComboBox() {
+        vegetableComboBox.getItems().clear();
+        vegetableComboBox.getItems().addAll(kaleYard.getItems());
+        vegetableComboBox.getSelectionModel().selectFirst();
+    }
+
+    private void loadTreeComboBox() {
+        treeComboBox.getItems().clear();
+        treeComboBox.getItems().addAll(garden.getItems());
+        treeComboBox.getSelectionModel().selectFirst();
     }
 
     private void printKaleYardContent() {
@@ -76,6 +100,7 @@ public class Controller {
     private void printGarden() {
         printGardenContent();
         printGardenInfo();
+        loadTreeComboBox();
     }
 
     private void printGardenContent() {
@@ -356,16 +381,14 @@ public class Controller {
     }
 
     private void saveResoursesToFile(File file) {
-        try (DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(file))) {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-            saveTractor(byteArrayOutputStream);
-            saveSprinkler(byteArrayOutputStream);
-            saveStock(byteArrayOutputStream);
-            saveGarden(byteArrayOutputStream);
-            saveKaleYard(byteArrayOutputStream);
-
-            byteArrayOutputStream.writeTo(dataOutputStream);
+        try {
+            FileOutputSerializingStream outputSerializingStream = new FileOutputSerializingStream(file);
+            outputSerializingStream.write(sprinkler);
+            outputSerializingStream.write(tractor);
+            outputSerializingStream.write(stock);
+            outputSerializingStream.write(garden);
+            outputSerializingStream.write(kaleYard);
+            outputSerializingStream.close();
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Ошибка во время сохранения файла");
             System.out.println(e);
@@ -373,71 +396,18 @@ public class Controller {
     }
 
     private void loadResoursesFromFile(File file) {
-        try (DataInputStream inputStream = new DataInputStream(new FileInputStream(file))) {
-            /*ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            int tempByte;
-            while ((tempByte = inputStream.read()) != -1) {
-                byteArrayOutputStream.write(tempByte);
-            }
-
-            byteArrayOutputStream.writeTo(System.out);*/
-            /*ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            int tempByte;
-            while ((tempByte = inputStream.read()) != -1) {
-                byteArrayOutputStream.write(tempByte);
-            }
-
-            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
-
-            loadTractor(byteArrayInputStream);
-            loadSprinkler(byteArrayInputStream);
-            loadStock(byteArrayInputStream);
-            loadGarden(byteArrayInputStream);
-            loadKaleYard(byteArrayInputStream);*/
-            Serializer.testSerialize();
+        try {
+            FileInputSerializingStream inputSerializingStream = new FileInputSerializingStream(file);
+            sprinkler = inputSerializingStream.read(Sprinkler.class);
+            tractor = inputSerializingStream.read(Tractor.class);
+            stock = inputSerializingStream.read(Stock.class);
+            garden = inputSerializingStream.read(Garden.class);
+            kaleYard = inputSerializingStream.read(KaleYard.class);
+            inputSerializingStream.close();
+            printAll();
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Ошибка во время загрузки файла");
             System.out.println(e);
         }
-    }
-
-    private void loadTractor(ByteArrayInputStream inputStream) throws IOException {
-        tractor = Serializer.deserialize(inputStream, Tractor.class);
-    }
-
-    private void saveTractor(ByteArrayOutputStream outputStream) throws IOException {
-        Serializer.serialize(outputStream, tractor);
-    }
-
-    private void loadSprinkler(ByteArrayInputStream inputStream) throws IOException {
-        sprinkler = Serializer.deserialize(inputStream, Sprinkler.class);
-    }
-
-    private void saveSprinkler(ByteArrayOutputStream outputStream) throws IOException {
-        Serializer.serialize(outputStream, sprinkler);
-    }
-
-    private void loadStock(ByteArrayInputStream inputStream) throws IOException {
-        stock = Serializer.deserialize(inputStream, Stock.class);
-    }
-
-    private void saveStock(ByteArrayOutputStream outputStream) throws IOException {
-        Serializer.serialize(outputStream, stock);
-    }
-
-    private void loadGarden(ByteArrayInputStream inputStream) throws IOException {
-        garden = Serializer.deserialize(inputStream, Garden.class);
-    }
-
-    private void saveGarden(ByteArrayOutputStream outputStream) throws IOException {
-        Serializer.serialize(outputStream, garden);
-    }
-
-    private void loadKaleYard(ByteArrayInputStream inputStream) throws IOException {
-        kaleYard = Serializer.deserialize(inputStream, KaleYard.class);
-    }
-
-    private void saveKaleYard(ByteArrayOutputStream outputStream) throws IOException {
-        Serializer.serialize(outputStream, kaleYard);
     }
 }
