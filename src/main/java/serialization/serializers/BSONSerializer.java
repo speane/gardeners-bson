@@ -3,8 +3,8 @@ package serialization.serializers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.undercouch.bson4jackson.BsonFactory;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
@@ -13,6 +13,6 @@ import java.io.IOException;
 public interface BSONSerializer<T> {
     ObjectMapper mapper = new ObjectMapper(new BsonFactory());
 
-    void writeToStream(DataOutputStream stream, T object) throws IOException;
-    T readFromStream(DataInputStream stream) throws IOException;
+    void writeToStream(ByteArrayOutputStream stream, T object) throws IOException;
+    T readFromStream(ByteArrayInputStream stream) throws IOException;
 }
